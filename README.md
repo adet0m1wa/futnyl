@@ -12,7 +12,7 @@ Open Terminal and paste:
 curl -fsSL https://raw.githubusercontent.com/adet0m1wa/futnyl/main/install.sh | bash
 ```
 
-It downloads the latest [release](https://github.com/adet0m1wa/futnyl/releases/latest), puts `Futnyl.app` in `/Applications` and opens it. The script is [short](install.sh), so read it first if you like. You can also download `Futnyl.zip` from the releases page and drag the app anywhere.
+It downloads the latest [release](https://github.com/adet0m1wa/futnyl/releases/latest), puts `Futnyl.app` in `/Applications` and opens it. The script is [short](install.sh), so read it first if you like. You can also download `Futnyl.zip` from the releases page and drag the app anywhere. Because the app isn't notarized by Apple (that needs a paid developer account), macOS will block a browser download the first time. Right-click `Futnyl.app`, choose **Open**, then **Open** again. The Terminal install above doesn't have this step.
 
 Needs macOS 14 or newer and the Spotify desktop app.
 
