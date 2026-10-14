@@ -1,5 +1,6 @@
-"""Removes the dummy-Spotify test bench from a copy of the Rive project, so the
-app's .riv carries only the vinyl (no test songs, covers or script).
+"""Removes the dummy-Spotify test bench and the "futnyl icon" artboard from a copy
+of the Rive project, so the app's .riv carries only the vinyl (no test songs,
+covers or script).
 Usage: python3 strip-bench.py <copy of rive/>/scene.rml
 """
 import re
@@ -8,7 +9,7 @@ import sys
 path = sys.argv[1]
 s = open(path).read()
 
-if "spotify test" not in s:
+if "spotify test" not in s and "futnyl icon" not in s:
     print("no test bench to strip")
     sys.exit(0)
 
@@ -32,11 +33,13 @@ def cut(start_pat, tag):
     s = s[:i] + s[s.index("\n", j) + 1:]
 
 
+if "futnyl icon" in s:
+    cut(r'<Artboard [^>]*name="futnyl icon"', "Artboard")
 cut(r'<Artboard [^>]*name="spotify test"', "Artboard")
 cut(r'<ViewModel [^>]*name="Spotify Test"', "ViewModel")
 cut(r'<ViewModelInstance [^>]*name="Bench vinyl"', "ViewModelInstance")
 s = re.sub(r'\n\s*<(AudioAsset|ImageAsset) [^>]*file="test/[^"]*"[^>]*/>', "", s)
 s = re.sub(r'\n\s*<ScriptAsset [^>]*file="dummySpotify.luau"[^>]*/>', "", s)
-assert "test/" not in s and "dummySpotify" not in s and "spotify test" not in s
+assert "test/" not in s and "dummySpotify" not in s and "spotify test" not in s and "futnyl icon" not in s
 open(path, "w").write(s)
 print("stripped the test bench")
