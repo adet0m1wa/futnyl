@@ -358,9 +358,13 @@ final class VinylController {
     private func trackChanged(to id: String) {
         let previous = appTrack
         appTrack = id
+        // The song already showing when the widget opened was never recorded;
+        // without it the way back to it is mistaken for another "next".
+        if history.isEmpty, let previous { history.append(previous) }
         let wentBack = history.dropLast().last == id
         if wentBack { history.removeLast() } else { history.append(id) }
         if history.count > 20 { history.removeFirst() }
+        debugLog("history \(history.map { String($0.suffix(4)) }) wentBack=\(wentBack) keyChange=\(keyChangeAt != nil)")
 
         if keyChangeAt != nil {
             // A key already started the change.

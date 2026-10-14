@@ -10,7 +10,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 ROOT="$(pwd)"
 APP="$ROOT/dist/Futnyl.app"
-VERSION="1.0.0"
+VERSION="1.0.1"
 RIVE="${RIVE:-$HOME/.rive/bin/rive}"
 
 # The app's Rive file: the project without its dummy-Spotify test bench (no
