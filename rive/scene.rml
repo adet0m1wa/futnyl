@@ -7,7 +7,7 @@
         <RulerGuide axisPosition="136" name="Guide" id="3:10"/>
         <RulerGuide axisPosition="217" name="Guide" id="3:11"/>
         <RulerGuide axisPosition="55" name="Guide" id="3:12"/>
-        <Node x="136.60001" y="237" name="controls" id="9:100">
+        <Node x="136.60001" y="237" name="controls" id="9:100"><DataBindContext sourcePathIds="3:1637-16:1" propertyKey="14" id="16:101"/>
             <Node x="-45" name="back button" id="9:110">
                 <Node name="back key" id="10:1001">
                     <Shape name="back icon" id="9:111">
@@ -18,7 +18,7 @@
                             <StraightVertex radius="0.5" x="3.3" y="3.4000001" id="9:1112"/>
                         </PointsPath>
                         <Fill name="icon fill" id="9:112">
-                            <SolidColor colorValue="FF8A8A8A" name="icon color" id="9:113"/>
+                            <SolidColor colorValue="FF8A8A8A" name="icon color" id="9:113"><DataBindContext sourcePathIds="3:1637-15:6" propertyKey="37" id="15:101"/></SolidColor>
                         </Fill>
                     </Shape>
                     <Shape name="back cap" id="10:1002">
@@ -29,8 +29,8 @@
                         </Fill>
                         <Fill name="face" id="10:1009">
                             <LinearGradient startY="-8.8000002" endY="8.8000002" name="Component" id="10:1010">
-                                <GradientStop colorValue="FFE6E3DE" name="Component" id="10:1011"/>
-                                <GradientStop colorValue="FFF1EFEC" position="1" name="Component" id="10:1012"/>
+                                <GradientStop colorValue="FFE6E3DE" name="Component" id="10:1011"><DataBindContext sourcePathIds="3:1637-15:4" propertyKey="38" id="15:102"/></GradientStop>
+                                <GradientStop colorValue="FFF1EFEC" position="1" name="Component" id="10:1012"><DataBindContext sourcePathIds="3:1637-15:5" propertyKey="38" id="15:103"/></GradientStop>
                             </LinearGradient>
                         </Fill>
                         <Fill fillRule="clockwise" name="inner shade" id="10:1013">
@@ -38,7 +38,7 @@
                             <Feather strength="3.4000001" offsetY="2.0999999" inner="true" name="Feather" id="10:1014"/>
                         </Fill>
                         <Fill fillRule="clockwise" name="lower highlight" id="10:1015">
-                            <SolidColor colorValue="99FFFFFF" name="Component" id="10:1016"/>
+                            <SolidColor colorValue="99FFFFFF" name="Component" id="10:1016"><DataBindContext sourcePathIds="3:1637-15:14" propertyKey="37" id="15:104"/></SolidColor>
                             <Feather strength="1.6" offsetY="-1" inner="true" name="Feather" id="10:1017"/>
                         </Fill>
                     </Shape>
@@ -53,8 +53,8 @@
                     <Ellipse width="22.4" height="22.4" name="Path" id="10:1022"/>
                     <Fill name="Fill" id="0:23480">
                         <LinearGradient startY="-11.339417" endY="11.344849" id="0:23481">
-                            <GradientStop colorValue="00F4F4F4" id="0:23482"/>
-                            <GradientStop colorValue="FFF4F4F4" position="1" id="0:23483"/>
+                            <GradientStop colorValue="00F4F4F4" id="0:23482"><DataBindContext sourcePathIds="3:1637-15:9" propertyKey="38" id="15:105"/></GradientStop>
+                            <GradientStop colorValue="FFF4F4F4" position="1" id="0:23483"><DataBindContext sourcePathIds="3:1637-15:8" propertyKey="38" id="15:106"/></GradientStop>
                         </LinearGradient>
                     </Fill>
                     <Fill fillRule="clockwise" name="recess" id="0:23484">
@@ -69,7 +69,7 @@
                         <Rectangle cornerRadiusTL="0.5" width="1.9" height="7" x="-1.9" name="bar" id="9:144"/>
                         <Rectangle cornerRadiusTL="0.5" width="1.9" height="7" x="1.9" name="bar" id="9:145"/>
                         <Fill name="icon fill" id="9:132">
-                            <SolidColor colorValue="FF8A8A8A" name="icon color" id="9:133"/>
+                            <SolidColor colorValue="FF8A8A8A" name="icon color" id="9:133"><DataBindContext sourcePathIds="3:1637-15:6" propertyKey="37" id="15:107"/></SolidColor>
                         </Fill>
                     </Shape>
                     <Shape name="pause cap" id="10:1029">
@@ -80,8 +80,8 @@
                         </Fill>
                         <Fill name="face" id="10:1036">
                             <LinearGradient startY="-8.8000002" endY="8.8000002" name="Component" id="10:1037">
-                                <GradientStop colorValue="FFE6E3DE" name="Component" id="10:1038"/>
-                                <GradientStop colorValue="FFF1EFEC" position="1" name="Component" id="10:1039"/>
+                                <GradientStop colorValue="FFE6E3DE" name="Component" id="10:1038"><DataBindContext sourcePathIds="3:1637-15:4" propertyKey="38" id="15:108"/></GradientStop>
+                                <GradientStop colorValue="FFF1EFEC" position="1" name="Component" id="10:1039"><DataBindContext sourcePathIds="3:1637-15:5" propertyKey="38" id="15:109"/></GradientStop>
                             </LinearGradient>
                         </Fill>
                         <Fill fillRule="clockwise" name="inner shade" id="10:1040">
@@ -89,7 +89,7 @@
                             <Feather strength="3.4000001" offsetY="2.0999999" inner="true" name="Feather" id="10:1041"/>
                         </Fill>
                         <Fill fillRule="clockwise" name="lower highlight" id="10:1042">
-                            <SolidColor colorValue="99FFFFFF" name="Component" id="10:1043"/>
+                            <SolidColor colorValue="99FFFFFF" name="Component" id="10:1043"><DataBindContext sourcePathIds="3:1637-15:14" propertyKey="37" id="15:110"/></SolidColor>
                             <Feather strength="1.6" offsetY="-1" inner="true" name="Feather" id="10:1044"/>
                         </Fill>
                     </Shape>
@@ -104,8 +104,8 @@
                     <Ellipse width="22.4" height="22.4" name="Path" id="10:1049"/>
                     <Fill name="Fill" id="10:1050">
                         <LinearGradient startY="-11.339417" endY="11.344849" id="0:23476">
-                            <GradientStop colorValue="00F4F4F4" id="0:23477"/>
-                            <GradientStop colorValue="FFF4F4F4" position="1" id="0:23478"/>
+                            <GradientStop colorValue="00F4F4F4" id="0:23477"><DataBindContext sourcePathIds="3:1637-15:9" propertyKey="38" id="15:111"/></GradientStop>
+                            <GradientStop colorValue="FFF4F4F4" position="1" id="0:23478"><DataBindContext sourcePathIds="3:1637-15:8" propertyKey="38" id="15:112"/></GradientStop>
                         </LinearGradient>
                     </Fill>
                     <Fill fillRule="clockwise" name="recess" id="10:1052">
@@ -123,7 +123,7 @@
                             <StraightVertex radius="0.5" x="-2.4000001" y="3.7" id="9:1152"/>
                         </PointsPath>
                         <Fill name="icon fill" id="9:152">
-                            <SolidColor colorValue="FF8A8A8A" name="icon color" id="9:153"/>
+                            <SolidColor colorValue="FF8A8A8A" name="icon color" id="9:153"><DataBindContext sourcePathIds="3:1637-15:6" propertyKey="37" id="15:113"/></SolidColor>
                         </Fill>
                     </Shape>
                     <Shape name="play cap" id="10:1056">
@@ -134,8 +134,8 @@
                         </Fill>
                         <Fill name="face" id="10:1063">
                             <LinearGradient startY="-8.8000002" endY="8.8000002" name="Component" id="10:1064">
-                                <GradientStop colorValue="FFE6E3DE" name="Component" id="10:1065"/>
-                                <GradientStop colorValue="FFF1EFEC" position="1" name="Component" id="10:1066"/>
+                                <GradientStop colorValue="FFE6E3DE" name="Component" id="10:1065"><DataBindContext sourcePathIds="3:1637-15:4" propertyKey="38" id="15:114"/></GradientStop>
+                                <GradientStop colorValue="FFF1EFEC" position="1" name="Component" id="10:1066"><DataBindContext sourcePathIds="3:1637-15:5" propertyKey="38" id="15:115"/></GradientStop>
                             </LinearGradient>
                         </Fill>
                         <Fill fillRule="clockwise" name="inner shade" id="10:1067">
@@ -143,7 +143,7 @@
                             <Feather strength="3.4000001" offsetY="2.0999999" inner="true" name="Feather" id="10:1068"/>
                         </Fill>
                         <Fill fillRule="clockwise" name="lower highlight" id="10:1069">
-                            <SolidColor colorValue="99FFFFFF" name="Component" id="10:1070"/>
+                            <SolidColor colorValue="99FFFFFF" name="Component" id="10:1070"><DataBindContext sourcePathIds="3:1637-15:14" propertyKey="37" id="15:116"/></SolidColor>
                             <Feather strength="1.6" offsetY="-1" inner="true" name="Feather" id="10:1071"/>
                         </Fill>
                     </Shape>
@@ -158,8 +158,8 @@
                     <Ellipse width="22.4" height="22.4" name="Path" id="10:1076"/>
                     <Fill name="Fill" id="0:23488">
                         <LinearGradient startY="-11.339417" endY="11.344849" id="0:23489">
-                            <GradientStop colorValue="00F4F4F4" id="0:23490"/>
-                            <GradientStop colorValue="FFF4F4F4" position="1" id="0:23491"/>
+                            <GradientStop colorValue="00F4F4F4" id="0:23490"><DataBindContext sourcePathIds="3:1637-15:9" propertyKey="38" id="15:117"/></GradientStop>
+                            <GradientStop colorValue="FFF4F4F4" position="1" id="0:23491"><DataBindContext sourcePathIds="3:1637-15:8" propertyKey="38" id="15:118"/></GradientStop>
                         </LinearGradient>
                     </Fill>
                     <Fill fillRule="clockwise" name="recess" id="0:23492">
@@ -178,7 +178,7 @@
                             <StraightVertex radius="0.5" x="-3.3" y="3.4000001" id="9:1172"/>
                         </PointsPath>
                         <Fill name="icon fill" id="9:172">
-                            <SolidColor colorValue="FF8A8A8A" name="icon color" id="9:173"/>
+                            <SolidColor colorValue="FF8A8A8A" name="icon color" id="9:173"><DataBindContext sourcePathIds="3:1637-15:6" propertyKey="37" id="15:119"/></SolidColor>
                         </Fill>
                     </Shape>
                     <Shape name="forward cap" id="10:1083">
@@ -189,8 +189,8 @@
                         </Fill>
                         <Fill name="face" id="10:1090">
                             <LinearGradient startY="-8.8000002" endY="8.8000002" name="Component" id="10:1091">
-                                <GradientStop colorValue="FFE6E3DE" name="Component" id="10:1092"/>
-                                <GradientStop colorValue="FFF1EFEC" position="1" name="Component" id="10:1093"/>
+                                <GradientStop colorValue="FFE6E3DE" name="Component" id="10:1092"><DataBindContext sourcePathIds="3:1637-15:4" propertyKey="38" id="15:120"/></GradientStop>
+                                <GradientStop colorValue="FFF1EFEC" position="1" name="Component" id="10:1093"><DataBindContext sourcePathIds="3:1637-15:5" propertyKey="38" id="15:121"/></GradientStop>
                             </LinearGradient>
                         </Fill>
                         <Fill fillRule="clockwise" name="inner shade" id="10:1094">
@@ -198,7 +198,7 @@
                             <Feather strength="3.4000001" offsetY="2.0999999" inner="true" name="Feather" id="10:1095"/>
                         </Fill>
                         <Fill fillRule="clockwise" name="lower highlight" id="10:1096">
-                            <SolidColor colorValue="99FFFFFF" name="Component" id="10:1097"/>
+                            <SolidColor colorValue="99FFFFFF" name="Component" id="10:1097"><DataBindContext sourcePathIds="3:1637-15:14" propertyKey="37" id="15:122"/></SolidColor>
                             <Feather strength="1.6" offsetY="-1" inner="true" name="Feather" id="10:1098"/>
                         </Fill>
                     </Shape>
@@ -213,8 +213,8 @@
                     <Ellipse width="22.4" height="22.4" name="Path" id="10:1103"/>
                     <Fill name="Fill" id="0:23496">
                         <LinearGradient startY="-11.339417" endY="11.344849" id="0:23497">
-                            <GradientStop colorValue="00F4F4F4" id="0:23498"/>
-                            <GradientStop colorValue="FFF4F4F4" position="1" id="0:23499"/>
+                            <GradientStop colorValue="00F4F4F4" id="0:23498"><DataBindContext sourcePathIds="3:1637-15:9" propertyKey="38" id="15:123"/></GradientStop>
+                            <GradientStop colorValue="FFF4F4F4" position="1" id="0:23499"><DataBindContext sourcePathIds="3:1637-15:8" propertyKey="38" id="15:124"/></GradientStop>
                         </LinearGradient>
                     </Fill>
                     <Fill fillRule="clockwise" name="recess" id="0:23500">
@@ -230,7 +230,7 @@
                     <Feather strength="3" offsetY="1.2" inner="true" name="Feather" id="9:194"/>
                 </Fill>
                 <Fill name="tray fill" id="9:195">
-                    <SolidColor colorValue="FFE4E1DC" name="Component" id="9:196"/>
+                    <SolidColor colorValue="FFE4E1DC" name="Component" id="9:196"><DataBindContext sourcePathIds="3:1637-15:7" propertyKey="37" id="15:125"/></SolidColor>
                 </Fill>
                 <Stroke thickness="0.60000002" name="rim" id="9:197">
                     <SolidColor colorValue="597A7A7A" name="Component" id="9:198"/>
@@ -244,7 +244,7 @@
             <ScriptInputNumber name="quiet" id="9:504"/>
         </ScriptedDrawable>
         <Node x="136.59998" y="134.29999" scaleX="4.5999999" scaleY="4.5999999" name="main design" id="3:13">
-            <Node x="-26" y="18" scaleX="0.0080000004" scaleY="0.0080000004" name="speaker left" id="3:14">
+            <Node x="-26" y="18" scaleX="0.0080000004" scaleY="0.0080000004" name="speaker left" id="3:14"><DataBindContext sourcePathIds="3:1637-16:4" propertyKey="14" id="16:106"/>
                 <Node x="351.41299" y="953.08099" name="Group" id="3:15">
                     <Shape name="Ellipse" id="3:16">
                         <Ellipse width="44.990002" height="44.990002" name="Path" id="3:17"/>
@@ -1331,7 +1331,7 @@
                     </Shape>
                 </Node>
             </Node>
-            <Node x="18" y="18" scaleX="0.0080000004" scaleY="0.0080000004" name="speaker right" id="3:694">
+            <Node x="18" y="18" scaleX="0.0080000004" scaleY="0.0080000004" name="speaker right" id="3:694"><DataBindContext sourcePathIds="3:1637-16:4" propertyKey="14" id="16:107"/>
                 <Node x="351.41299" y="953.08099" name="Group" id="3:695">
                     <Shape name="Ellipse" id="3:696">
                         <Ellipse width="44.990002" height="44.990002" name="Path" id="3:697"/>
@@ -2418,7 +2418,7 @@
                     </Shape>
                 </Node>
             </Node>
-            <Shape x="-21.959999" y="21.93" name="speaker well left" id="11:2019">
+            <Shape x="-21.959999" y="21.93" name="speaker well left" id="11:2019"><DataBindContext sourcePathIds="3:1637-16:5" propertyKey="14" id="16:108"/>
                 <Ellipse width="9.6000004" height="9.6000004" name="Path" id="11:2020"/>
                 <Fill name="floor" id="11:2021">
                     <LinearGradient startY="-4.8000002" endY="4.8000002" name="Component" id="11:2022">
@@ -2435,7 +2435,7 @@
                     <Feather strength="0.60000002" offsetY="-0.34999999" inner="true" name="Feather" id="11:2030"/>
                 </Fill>
             </Shape>
-            <Shape x="21.959999" y="21.93" name="speaker well right" id="11:2031">
+            <Shape x="21.959999" y="21.93" name="speaker well right" id="11:2031"><DataBindContext sourcePathIds="3:1637-16:5" propertyKey="14" id="16:109"/>
                 <Ellipse width="9.6000004" height="9.6000004" name="Path" id="11:2032"/>
                 <Fill name="floor" id="11:2033">
                     <LinearGradient startY="-4.8000002" endY="4.8000002" name="Component" id="11:2034">
@@ -2452,7 +2452,7 @@
                     <Feather strength="0.60000002" offsetY="-0.34999999" inner="true" name="Feather" id="11:2042"/>
                 </Fill>
             </Shape>
-            <Node x="22.5" y="-22" name="arm sweep" id="11:3008">
+            <Node x="22.5" y="-22" name="arm sweep" id="11:3008"><DataBindContext sourcePathIds="3:1637-16:6" propertyKey="18" id="16:110"/>
                 <Node rotation="0.34906584" name="spindle" id="3:1374">
                     <Node y="33" rotation="0.59341186" name="needle" complexDependency="true" id="3:1375">
                         <Node x="1.1919377" y="4.0839252" rotation="-3.0643797e-08" name="base-handle" id="3:1376">
@@ -2641,7 +2641,7 @@
                             <CubicDetachedVertex inRotation="2.5612881" inDistance="0.65162688" outRotation="0.0095336782" outDistance="0.35570356" x="-1.0951236" y="-1.6738026" name="Component" id="3:1513"/>
                         </PointsPath>
                         <Fill name="Fill 1" id="3:1514">
-                            <SolidColor colorValue="FFF3F3F3" name="Component" id="3:1515"/>
+                            <SolidColor colorValue="FFF3F3F3" name="Component" id="3:1515"><DataBindContext sourcePathIds="3:1637-15:17" propertyKey="37" id="15:126"/></SolidColor>
                         </Fill>
                         <Fill fillRule="clockwise" name="Fill 2" id="3:1516">
                             <SolidColor colorValue="80747474" name="Component" id="3:1517"/>
@@ -2651,7 +2651,7 @@
                 </Node>
                 <DataBindContext sourcePathIds="3:1637-11:3001" propertyKey="15" converterId="11:3005" id="11:3009"/>
             </Node>
-            <Shape x="22.500002" y="-22" name="screw platform" id="3:1519">
+            <Shape x="22.500002" y="-22" name="screw platform" id="3:1519"><DataBindContext sourcePathIds="3:1637-16:6" propertyKey="18" id="16:111"/>
                 <Ellipse width="5" height="5" name="Path" id="3:1520"/>
                 <Fill name="Fill 1" id="3:1521">
                     <LinearGradient startX="-1.3197632" startY="-1.7600098" endX="1.8274536" endY="2.104744" name="Component" id="3:1522">
@@ -2660,11 +2660,11 @@
                     </LinearGradient>
                 </Fill>
             </Shape>
-            <Node x="-20.733383" y="-1.0100689" name="vinyl storage" id="3:1525">
+            <Node x="-20.733383" y="-1.0100689" name="vinyl storage" id="3:1525"><DataBindContext sourcePathIds="3:1637-16:6" propertyKey="18" id="16:112"/>
                 <Shape x="-3.6684093" y="12.417312" rotation="-2.3276584" name="design r" id="3:1526">
                     <Rectangle linkCornerRadius="false" cornerRadiusBL="2" cornerRadiusBR="2" width="13.073748" height="3.0833225" x="-2.3841858e-06" y="0.51389092" name="Path" id="3:1527"/>
                     <Fill name="Fill 1" id="3:1528">
-                        <SolidColor colorValue="FFDFDFDF" name="Component" id="3:1529"/>
+                        <SolidColor colorValue="FFDFDFDF" name="Component" id="3:1529"><DataBindContext sourcePathIds="3:1637-15:16" propertyKey="37" id="15:127"/></SolidColor>
                     </Fill>
                     <Stroke thickness="0.2" name="Stroke 1" id="3:1530">
                         <SolidColor colorValue="807A7A7A" name="Component" id="3:1531"/>
@@ -2674,7 +2674,7 @@
                 <Shape x="-3.4065053" y="-12.940803" rotation="-0.70921445" name="design l" id="3:1533">
                     <Rectangle linkCornerRadius="false" cornerRadiusBL="2" cornerRadiusBR="2" width="13.073748" height="2.6780572" x="-1.0949095e-06" y="0.44634485" name="Path" id="3:1534"/>
                     <Fill name="Fill 1" id="3:1535">
-                        <SolidColor colorValue="FFDFDFDF" name="Component" id="3:1536"/>
+                        <SolidColor colorValue="FFDFDFDF" name="Component" id="3:1536"><DataBindContext sourcePathIds="3:1637-15:16" propertyKey="37" id="15:128"/></SolidColor>
                     </Fill>
                     <Stroke thickness="0.2" name="Stroke 1" id="3:1537">
                         <SolidColor colorValue="807A7A7A" name="Component" id="3:1538"/>
@@ -2691,13 +2691,13 @@
                         <Feather strength="1" name="Component" id="3:1546"/>
                     </Fill>
                 </Shape>
-                <Text originX="0.5" originY="0.5" fitFontSizeResizesBox="false" x="3.9136198" y="-1.9899313" rotation="1.5707964" scaleY="1.0660956" name="status" id="3:1547">
-                    <TextStylePaint fontSize="4" fontAssetId="3:1866" familyName="IBM Plex Mono" styleName="Regular" name="Style 1" id="3:1548">
+                <Text originX="0.5" originY="0.5" fitFontSizeResizesBox="false" x="3.9136198" y="-3.7" rotation="1.5707964" scaleY="1.0660956" name="song title" id="3:1547">
+                    <TextStylePaint fontSize="2.15" fontAssetId="3:1866" familyName="IBM Plex Mono" styleName="Regular" name="Style 1" id="3:1548">
                         <Fill name="Fill 1" id="3:1549">
-                            <SolidColor colorValue="FFB7B7B7" name="Component" id="3:1550"/>
+                            <SolidColor colorValue="FFB7B7B7" name="Component" id="3:1550"><DataBindContext sourcePathIds="3:1637-15:18" propertyKey="37" id="15:129"/></SolidColor>
                         </Fill>
                     </TextStylePaint>
-                    <TextValueRun styleId="3:1548" text="PAUSED" name="Run 1" id="3:1551"/>
+                    <TextValueRun styleId="3:1548" text="Nothing playing" name="Song title" id="3:1551"><DataBindContext sourcePathIds="3:1637-16:20" propertyKey="268" id="16:190"/></TextValueRun>
                 </Text>
                 <Shape x="7.4136195" y="-0.48993257" scaleX="1.0232567" scaleY="0.94385338" name="platform" id="3:1552">
                     <PointsPath isClosed="true" y="-0.5" name="Path" id="3:1553">
@@ -2717,49 +2717,49 @@
                     </Stroke>
                     <Fill name="Fill 1" id="3:1565">
                         <LinearGradient startX="1.5000005" startY="0.52977467" endX="-15.499991" endY="0.41142946" name="Component" id="3:1566">
-                            <GradientStop colorValue="FFF6F4F0" name="Component" id="3:1567"/>
-                            <GradientStop colorValue="FFD8D4CE" position="1" name="Component" id="3:1568"/>
-                            <GradientStop colorValue="FFE6E2DC" position="0.41820771" name="Component" id="3:1569"/>
+                            <GradientStop colorValue="FFF6F4F0" name="Component" id="3:1567"><DataBindContext sourcePathIds="3:1637-15:10" propertyKey="38" id="15:130"/></GradientStop>
+                            <GradientStop colorValue="FFD8D4CE" position="1" name="Component" id="3:1568"><DataBindContext sourcePathIds="3:1637-15:11" propertyKey="38" id="15:131"/></GradientStop>
+                            <GradientStop colorValue="FFE6E2DC" position="0.41820771" name="Component" id="3:1569"><DataBindContext sourcePathIds="3:1637-15:12" propertyKey="38" id="15:132"/></GradientStop>
                         </LinearGradient>
                     </Fill>
                     <ClippingShape sourceId="3:1629" id="3:1570"/>
                 </Shape>
             </Node>
-            <Shape name="body bevel" id="11:2005">
-                <Rectangle cornerRadiusTL="8" width="58" height="58" name="Path" id="11:2006"/>
+            <Shape name="body bevel" id="11:2005"><DataBindContext sourcePathIds="3:1637-16:3" propertyKey="14" id="16:105"/>
+                <Rectangle cornerRadiusTL="8" width="58" height="58" name="Path" id="11:2006"><DataBindContext sourcePathIds="3:1637-16:2" propertyKey="21" id="16:103"/></Rectangle>
                 <Fill fillRule="clockwise" name="lower shade" id="11:2007">
                     <SolidColor colorValue="2E5A5040" name="Component" id="11:2008"/>
                     <Feather strength="2.2" offsetX="-0.40000001" offsetY="-1" inner="true" name="Feather" id="11:2009"/>
                 </Fill>
                 <Fill fillRule="clockwise" name="top highlight" id="11:2010">
-                    <SolidColor colorValue="E6FFFFFF" name="Component" id="11:2011"/>
+                    <SolidColor colorValue="E6FFFFFF" name="Component" id="11:2011"><DataBindContext sourcePathIds="3:1637-15:13" propertyKey="37" id="15:133"/></SolidColor>
                     <Feather strength="1.1" offsetX="0.30000001" offsetY="0.60000002" inner="true" name="Feather" id="11:2012"/>
                 </Fill>
             </Shape>
-            <Shape x="-21.891304" y="-0.54347718" scaleX="0.21739131" scaleY="0.21739131" name="vinyl mask" id="3:1571">
+            <Shape x="-21.891304" y="-0.54347718" scaleX="0.21739131" scaleY="0.21739131" name="vinyl mask" id="3:1571"><DataBindContext sourcePathIds="3:1637-16:6" propertyKey="18" id="16:113"/>
                 <Rectangle width="80" height="161" name="Path" id="3:1572"/>
                 <Fill name="Fill 1" id="3:1573">
                     <LinearGradient startX="103.9" startY="-132.2" endX="99.900002" endY="135.89999" name="Component" id="11:2001">
-                        <GradientStop colorValue="FFF6F5F2" name="Component" id="11:2002"/>
-                        <GradientStop colorValue="FFE3E0DB" position="1" name="Component" id="11:2003"/>
-                        <GradientStop colorValue="FFECEAE6" position="0.60000002" name="Component" id="11:2004"/>
+                        <GradientStop colorValue="FFF6F5F2" name="Component" id="11:2002"><DataBindContext sourcePathIds="3:1637-15:1" propertyKey="38" id="15:134"/></GradientStop>
+                        <GradientStop colorValue="FFE3E0DB" position="1" name="Component" id="11:2003"><DataBindContext sourcePathIds="3:1637-15:3" propertyKey="38" id="15:135"/></GradientStop>
+                        <GradientStop colorValue="FFECEAE6" position="0.60000002" name="Component" id="11:2004"><DataBindContext sourcePathIds="3:1637-15:2" propertyKey="38" id="15:136"/></GradientStop>
                     </LinearGradient>
                 </Fill>
                 <ClippingShape sourceId="3:1629" id="3:1575"/>
             </Shape>
-            <Shape x="-20.819763" y="-22" scaleX="0.88" scaleY="0.88" name="screw" id="3:1576">
+            <Shape x="-20.819763" y="-22" scaleX="0.88" scaleY="0.88" name="screw" id="3:1576"><DataBindContext sourcePathIds="3:1637-16:6" propertyKey="18" id="16:114"/>
                 <Ellipse width="4" height="4" name="Path" id="3:1577"/>
                 <Fill name="Fill 1" id="3:1578">
-                    <SolidColor colorValue="FFF3F3F3" name="Component" id="3:1579"/>
+                    <SolidColor colorValue="FFF3F3F3" name="Component" id="3:1579"><DataBindContext sourcePathIds="3:1637-15:17" propertyKey="37" id="15:137"/></SolidColor>
                 </Fill>
                 <Fill fillRule="clockwise" name="Fill 2" id="3:1580">
                     <SolidColor colorValue="80747474" name="Component" id="3:1581"/>
                     <Feather strength="1.5" offsetX="-1" offsetY="-1" inner="true" name="Component" id="3:1582"/>
                 </Fill>
             </Shape>
-            <Node y="-1" scaleX="0.94999999" scaleY="0.94999999" name="vinyl related" id="3:1583">
+            <Node y="-1" scaleX="0.94999999" scaleY="0.94999999" name="vinyl related" id="3:1583"><DataBindContext sourcePathIds="3:1637-16:9" propertyKey="14" id="16:120"/><DataBindContext sourcePathIds="3:1637-16:8" propertyKey="13" id="16:119"/><DataBindContext sourcePathIds="3:1637-16:7" propertyKey="17" id="16:118"/><DataBindContext sourcePathIds="3:1637-16:7" propertyKey="16" id="16:117"/>
                 <Node x="-0.0052620126" y="-0.047365543" name="vinyl group" id="3:1584">
-                    <Node scaleX="0.050000001" scaleY="0.050000001" name="record A" id="9:30">
+                    <Node scaleX="0.050000001" scaleY="0.050000001" name="record A" id="9:30"><DataBindContext sourcePathIds="3:1637-16:22" propertyKey="18" id="16:330"/>
                         <Node name="label A" id="9:31">
                             <Image scaleX="0.64453125" scaleY="0.64453125" name="cover A" id="9:32">
                                 <DataBindContext sourcePathIds="3:1637-12:3" propertyKey="18" id="0:23503"/>
@@ -2787,7 +2787,7 @@
                         <Image assetId="3:1867" name="default vinyl 1" id="3:1585"/>
                         <DataBindContext sourcePathIds="3:1637-3:1639" propertyKey="15" converterId="3:1871" id="3:1869"/>
                     </Node>
-                    <Node x="-30.000002" y="1.1324883e-06" scaleX="0.052999999" scaleY="0.052999999" name="record B" id="9:40">
+                    <Node x="-30.000002" y="1.1324883e-06" scaleX="0.052999999" scaleY="0.052999999" name="record B" id="9:40"><DataBindContext sourcePathIds="3:1637-16:23" propertyKey="18" id="16:331"/>
                         <Node name="label B" id="9:41">
                             <Image scaleX="0.64453125" scaleY="0.64453125" name="cover B" id="9:42">
                                 <DataBindContext sourcePathIds="3:1637-12:4" propertyKey="18" id="0:23513"/>
@@ -2829,7 +2829,7 @@
                         <Feather strength="1" offsetY="0.5" name="Component" id="3:1596"/>
                     </Fill>
                     <Fill name="Fill 1" id="3:1597">
-                        <SolidColor colorValue="FFF3F3F3" name="Component" id="3:1598"/>
+                        <SolidColor colorValue="FFF3F3F3" name="Component" id="3:1598"><DataBindContext sourcePathIds="3:1637-15:17" propertyKey="37" id="15:138"/></SolidColor>
                     </Fill>
                     <Fill fillRule="clockwise" name="Fill 2" id="3:1599">
                         <SolidColor colorValue="80747474" name="Component" id="3:1600"/>
@@ -2848,9 +2848,9 @@
                     </Fill>
                     <Fill name="Fill 3" id="3:1610">
                         <LinearGradient startY="18.5" endY="-18.5" name="Component" id="3:1611">
-                            <GradientStop colorValue="FFFAF9F7" position="0.48648649" name="Component" id="3:1612"/>
-                            <GradientStop colorValue="FFE2DFDA" position="1" name="Component" id="3:1613"/>
-                            <GradientStop colorValue="FFE5E2DD" position="0.0013253348" name="Component" id="3:1614"/>
+                            <GradientStop colorValue="FFFAF9F7" position="0.48648649" name="Component" id="3:1612"><DataBindContext sourcePathIds="3:1637-15:19" propertyKey="38" id="15:139"/></GradientStop>
+                            <GradientStop colorValue="FFE2DFDA" position="1" name="Component" id="3:1613"><DataBindContext sourcePathIds="3:1637-15:20" propertyKey="38" id="15:140"/></GradientStop>
+                            <GradientStop colorValue="FFE5E2DD" position="0.0013253348" name="Component" id="3:1614"><DataBindContext sourcePathIds="3:1637-15:21" propertyKey="38" id="15:141"/></GradientStop>
                         </LinearGradient>
                     </Fill>
                     <Fill fillRule="clockwise" name="recess" id="11:2013">
@@ -2858,38 +2858,38 @@
                         <Feather strength="1.6" offsetY="0.89999998" inner="true" name="Feather" id="11:2015"/>
                     </Fill>
                     <Fill fillRule="clockwise" name="lip highlight" id="11:2016">
-                        <SolidColor colorValue="B3FFFFFF" name="Component" id="11:2017"/>
+                        <SolidColor colorValue="B3FFFFFF" name="Component" id="11:2017"><DataBindContext sourcePathIds="3:1637-15:15" propertyKey="37" id="15:142"/></SolidColor>
                         <Feather strength="0.80000001" offsetY="-0.40000001" inner="true" name="Feather" id="11:2018"/>
                     </Fill>
                 </Shape>
             </Node>
-            <Shape x="0.18023682" y="28.5" rotation="3.1415927" name="design bottom" hidden="true" id="3:1615">
+            <Shape x="0.18023682" y="28.5" rotation="3.1415927" name="design bottom" hidden="true" id="3:1615"><DataBindContext sourcePathIds="3:1637-16:6" propertyKey="18" id="16:115"/>
                 <Rectangle linkCornerRadius="false" cornerRadiusBL="2" cornerRadiusBR="2" width="28" height="3" y="0.5" name="Path" id="3:1616"/>
                 <Fill name="Fill 1" id="3:1617">
-                    <SolidColor colorValue="FFDFDFDF" name="Component" id="3:1618"/>
+                    <SolidColor colorValue="FFDFDFDF" name="Component" id="3:1618"><DataBindContext sourcePathIds="3:1637-15:16" propertyKey="37" id="15:143"/></SolidColor>
                 </Fill>
                 <ClippingShape sourceId="3:1629" id="3:1619"/>
                 <Stroke thickness="0.2" name="Stroke 1" id="3:1620">
                     <SolidColor colorValue="807A7A7A" name="Component" id="3:1621"/>
                 </Stroke>
             </Shape>
-            <Shape x="0.18023682" y="-28.5" name="design top" id="3:1622">
+            <Shape x="0.18023682" y="-28.5" name="design top" id="3:1622"><DataBindContext sourcePathIds="3:1637-16:6" propertyKey="18" id="16:116"/>
                 <Rectangle linkCornerRadius="false" cornerRadiusBL="2" cornerRadiusBR="2" width="18" height="3" y="0.5" name="Path" id="3:1623"/>
                 <Fill name="Fill 1" id="3:1624">
-                    <SolidColor colorValue="FFDFDFDF" name="Component" id="3:1625"/>
+                    <SolidColor colorValue="FFDFDFDF" name="Component" id="3:1625"><DataBindContext sourcePathIds="3:1637-15:16" propertyKey="37" id="15:144"/></SolidColor>
                 </Fill>
                 <ClippingShape sourceId="3:1629" id="3:1626"/>
                 <Stroke thickness="0.2" name="Stroke 1" id="3:1627">
                     <SolidColor colorValue="807A7A7A" name="Component" id="3:1628"/>
                 </Stroke>
             </Shape>
-            <Shape name="main body" id="3:1629">
-                <Rectangle cornerRadiusTL="8" width="58" height="58" name="Path" id="3:1630"/>
+            <Shape name="main body" id="3:1629"><DataBindContext sourcePathIds="3:1637-16:3" propertyKey="14" id="16:104"/>
+                <Rectangle cornerRadiusTL="8" width="58" height="58" name="Path" id="3:1630"><DataBindContext sourcePathIds="3:1637-16:2" propertyKey="21" id="16:102"/></Rectangle>
                 <Fill name="Fill 1" id="3:1631">
                     <LinearGradient startX="0.68533331" startY="-29.273699" endX="-0.18024385" endY="29.000011" name="Component" id="3:1632">
-                        <GradientStop colorValue="FFF6F5F2" name="Component" id="3:1633"/>
-                        <GradientStop colorValue="FFE3E0DB" position="1" name="Component" id="3:1634"/>
-                        <GradientStop colorValue="FFECEAE6" position="0.60000002" name="Component" id="3:1635"/>
+                        <GradientStop colorValue="FFF6F5F2" name="Component" id="3:1633"><DataBindContext sourcePathIds="3:1637-15:1" propertyKey="38" id="15:145"/></GradientStop>
+                        <GradientStop colorValue="FFE3E0DB" position="1" name="Component" id="3:1634"><DataBindContext sourcePathIds="3:1637-15:3" propertyKey="38" id="15:146"/></GradientStop>
+                        <GradientStop colorValue="FFECEAE6" position="0.60000002" name="Component" id="3:1635"><DataBindContext sourcePathIds="3:1637-15:2" propertyKey="38" id="15:147"/></GradientStop>
                     </LinearGradient>
                 </Fill>
             </Shape>
@@ -3561,11 +3561,6 @@
                     <KeyFrameDouble interpolationType="linear" id="0:23698"/>
                 </KeyedProperty>
             </KeyedObject>
-            <KeyedObject objectId="3:1551" id="0:23699">
-                <KeyedProperty property="text" id="0:23700">
-                    <KeyFrameString value="LAUNCHING" id="0:23701"/>
-                </KeyedProperty>
-            </KeyedObject>
             <KeyedObject objectId="3:1545" id="0:23702">
                 <KeyedProperty property="colorValue" id="0:23703">
                     <KeyFrameColor value="001B86D1" interpolationType="hold" frame="0" id="0:23704"/>
@@ -3598,16 +3593,6 @@
                     <KeyFrameColor value="601B86D1" interpolationType="hold" frame="42" id="0:23729"/>
                     <KeyFrameColor value="BF1B86D1" interpolationType="hold" frame="44" id="0:23730"/>
                     <KeyFrameColor value="401B86D1" interpolationType="hold" frame="60" id="0:23731"/>
-                </KeyedProperty>
-            </KeyedObject>
-            <KeyedObject objectId="3:1548" id="0:23732">
-                <KeyedProperty property="fontSize" id="0:23733">
-                    <KeyFrameDouble value="3.6" interpolationType="hold" id="0:23734"/>
-                </KeyedProperty>
-            </KeyedObject>
-            <KeyedObject objectId="3:1547" id="0:23735">
-                <KeyedProperty property="y" id="0:23736">
-                    <KeyFrameDouble value="-3.2" interpolationType="hold" id="0:23737"/>
                 </KeyedProperty>
             </KeyedObject>
         </LinearAnimation>
@@ -3656,11 +3641,6 @@
                     <KeyFrameDouble value="-6.2006551e-17" interpolationType="linear" frame="27" id="0:23769"/>
                 </KeyedProperty>
             </KeyedObject>
-            <KeyedObject objectId="3:1551" id="0:23770">
-                <KeyedProperty property="text" id="0:23771">
-                    <KeyFrameString value="CHANGING" interpolationType="linear" frame="0" id="0:23772"/>
-                </KeyedProperty>
-            </KeyedObject>
             <KeyedObject objectId="3:1545" id="0:23773">
                 <KeyedProperty property="colorValue" id="0:23774">
                     <KeyFrameColor value="008A94A6" interpolationType="linear" frame="0" id="0:23775"/>
@@ -3669,16 +3649,6 @@
             <KeyedObject objectId="3:1543" id="0:23776">
                 <KeyedProperty property="colorValue" id="0:23777">
                     <KeyFrameColor value="668A94A6" interpolationType="linear" frame="0" id="0:23778"/>
-                </KeyedProperty>
-            </KeyedObject>
-            <KeyedObject objectId="3:1548" id="0:23779">
-                <KeyedProperty property="fontSize" id="0:23780">
-                    <KeyFrameDouble value="4" interpolationType="hold" frame="0" id="0:23781"/>
-                </KeyedProperty>
-            </KeyedObject>
-            <KeyedObject objectId="3:1547" id="0:23782">
-                <KeyedProperty property="y" id="0:23783">
-                    <KeyFrameDouble value="-1.9899313" interpolationType="hold" frame="0" id="0:23784"/>
                 </KeyedProperty>
             </KeyedObject>
         </LinearAnimation>
@@ -3729,11 +3699,6 @@
                     <KeyFrameDouble value="0.34906584" interpolationType="linear" frame="33" id="0:23818"/>
                 </KeyedProperty>
             </KeyedObject>
-            <KeyedObject objectId="3:1551" id="0:23819">
-                <KeyedProperty property="text" id="0:23820">
-                    <KeyFrameString value="CHANGING" interpolationType="linear" frame="0" id="0:23821"/>
-                </KeyedProperty>
-            </KeyedObject>
             <KeyedObject objectId="3:1545" id="0:23822">
                 <KeyedProperty property="colorValue" id="0:23823">
                     <KeyFrameColor value="008A94A6" interpolationType="linear" frame="0" id="0:23824"/>
@@ -3742,16 +3707,6 @@
             <KeyedObject objectId="3:1543" id="0:23825">
                 <KeyedProperty property="colorValue" id="0:23826">
                     <KeyFrameColor value="668A94A6" interpolationType="linear" frame="0" id="0:23827"/>
-                </KeyedProperty>
-            </KeyedObject>
-            <KeyedObject objectId="3:1548" id="0:23828">
-                <KeyedProperty property="fontSize" id="0:23829">
-                    <KeyFrameDouble value="4" interpolationType="hold" frame="0" id="0:23830"/>
-                </KeyedProperty>
-            </KeyedObject>
-            <KeyedObject objectId="3:1547" id="0:23831">
-                <KeyedProperty property="y" id="0:23832">
-                    <KeyFrameDouble value="-1.9899313" interpolationType="hold" frame="0" id="0:23833"/>
                 </KeyedProperty>
             </KeyedObject>
         </LinearAnimation>
@@ -3782,11 +3737,6 @@
                     <KeyFrameDouble value="-30" interpolationType="linear" frame="0" id="0:23849"/>
                 </KeyedProperty>
             </KeyedObject>
-            <KeyedObject objectId="3:1551" id="0:23850">
-                <KeyedProperty property="text" id="0:23851">
-                    <KeyFrameString value="CHANGING" interpolationType="linear" frame="0" id="0:23852"/>
-                </KeyedProperty>
-            </KeyedObject>
             <KeyedObject objectId="9:40" id="0:23853">
                 <KeyedProperty property="scaleY" id="0:23854">
                     <KeyFrameDouble value="0.050000001" interpolationType="linear" frame="0" id="0:23855"/>
@@ -3815,16 +3765,6 @@
                     <KeyFrameDouble value="0.34906584" interpolationType="linear" frame="0" id="0:23874"/>
                     <KeyFrameDouble value="-6.2006551e-17" interpolationType="linear" frame="10" id="0:23875"/>
                     <KeyFrameDouble value="-6.2006551e-17" interpolationType="linear" frame="33" id="0:23876"/>
-                </KeyedProperty>
-            </KeyedObject>
-            <KeyedObject objectId="3:1548" id="0:23877">
-                <KeyedProperty property="fontSize" id="0:23878">
-                    <KeyFrameDouble value="4" interpolationType="hold" frame="0" id="0:23879"/>
-                </KeyedProperty>
-            </KeyedObject>
-            <KeyedObject objectId="3:1547" id="0:23880">
-                <KeyedProperty property="y" id="0:23881">
-                    <KeyFrameDouble value="-1.9899313" interpolationType="hold" frame="0" id="0:23882"/>
                 </KeyedProperty>
             </KeyedObject>
         </LinearAnimation>
@@ -3865,11 +3805,6 @@
                     <KeyFrameDouble value="0" interpolationType="linear" frame="27" id="0:23908"/>
                 </KeyedProperty>
             </KeyedObject>
-            <KeyedObject objectId="3:1551" id="0:23909">
-                <KeyedProperty property="text" id="0:23910">
-                    <KeyFrameString value="CHANGING" interpolationType="linear" frame="0" id="0:23911"/>
-                </KeyedProperty>
-            </KeyedObject>
             <KeyedObject objectId="9:40" id="0:23912">
                 <KeyedProperty property="scaleY" id="0:23913">
                     <KeyFrameDouble value="0.052999999" interpolationType="linear" frame="0" id="0:23914"/>
@@ -3888,26 +3823,11 @@
                     <KeyFrameDouble value="0.34906584" interpolationType="linear" frame="27" id="0:23923"/>
                 </KeyedProperty>
             </KeyedObject>
-            <KeyedObject objectId="3:1548" id="0:23924">
-                <KeyedProperty property="fontSize" id="0:23925">
-                    <KeyFrameDouble value="4" interpolationType="hold" frame="0" id="0:23926"/>
-                </KeyedProperty>
-            </KeyedObject>
-            <KeyedObject objectId="3:1547" id="0:23927">
-                <KeyedProperty property="y" id="0:23928">
-                    <KeyFrameDouble value="-1.9899313" interpolationType="hold" frame="0" id="0:23929"/>
-                </KeyedProperty>
-            </KeyedObject>
         </LinearAnimation>
         <LinearAnimation speed="0.5" loopValue="loop" name="the pearls activated" id="3:1724">
             <KeyedObject objectId="9:504" id="0:5340">
                 <KeyedProperty property="propertyValue" id="0:5341">
                     <KeyFrameDouble interpolationType="linear" id="0:5342"/>
-                </KeyedProperty>
-            </KeyedObject>
-            <KeyedObject objectId="3:1551" id="3:1725">
-                <KeyedProperty property="text" id="3:1726">
-                    <KeyFrameString value="PLAYING" id="3:1727"/>
                 </KeyedProperty>
             </KeyedObject>
             <KeyedObject objectId="3:1374" id="3:1728">
@@ -3927,16 +3847,6 @@
             <KeyedObject objectId="3:1543" id="3:1738">
                 <KeyedProperty property="colorValue" id="3:1739">
                     <KeyFrameColor value="663FAF7C" interpolationType="linear" id="3:1740"/>
-                </KeyedProperty>
-            </KeyedObject>
-            <KeyedObject objectId="3:1548" id="0:23930">
-                <KeyedProperty property="fontSize" id="0:23931">
-                    <KeyFrameDouble value="4" interpolationType="hold" id="0:23932"/>
-                </KeyedProperty>
-            </KeyedObject>
-            <KeyedObject objectId="3:1547" id="0:23933">
-                <KeyedProperty property="y" id="0:23934">
-                    <KeyFrameDouble value="-1.9899313" interpolationType="hold" id="0:23935"/>
                 </KeyedProperty>
             </KeyedObject>
         </LinearAnimation>
@@ -3965,21 +3875,6 @@
                     <KeyFrameColor value="003FAF7C" interpolationType="linear" frame="60" id="3:1718"/>
                 </KeyedProperty>
             </KeyedObject>
-            <KeyedObject objectId="3:1551" id="3:1721">
-                <KeyedProperty property="text" id="3:1722">
-                    <KeyFrameString value="PLAYING" id="3:1723"/>
-                </KeyedProperty>
-            </KeyedObject>
-            <KeyedObject objectId="3:1548" id="0:23936">
-                <KeyedProperty property="fontSize" id="0:23937">
-                    <KeyFrameDouble value="4" interpolationType="hold" id="0:23938"/>
-                </KeyedProperty>
-            </KeyedObject>
-            <KeyedObject objectId="3:1547" id="0:23939">
-                <KeyedProperty property="y" id="0:23940">
-                    <KeyFrameDouble value="-1.9899313" interpolationType="hold" id="0:23941"/>
-                </KeyedProperty>
-            </KeyedObject>
         </LinearAnimation>
         <LinearAnimation duration="1" speed="0" name="pause" id="3:1665">
             <KeyedObject objectId="9:504" id="0:5346">
@@ -3995,21 +3890,6 @@
             <KeyedObject objectId="3:1545" id="3:1679">
                 <KeyedProperty property="colorValue" id="3:1680">
                     <KeyFrameColor value="00FFA500" interpolationType="linear" id="3:1681"/>
-                </KeyedProperty>
-            </KeyedObject>
-            <KeyedObject objectId="3:1551" id="3:1682">
-                <KeyedProperty property="text" id="3:1683">
-                    <KeyFrameString value="PAUSED" id="3:1684"/>
-                </KeyedProperty>
-            </KeyedObject>
-            <KeyedObject objectId="3:1548" id="0:23942">
-                <KeyedProperty property="fontSize" id="0:23943">
-                    <KeyFrameDouble value="4" interpolationType="hold" id="0:23944"/>
-                </KeyedProperty>
-            </KeyedObject>
-            <KeyedObject objectId="3:1547" id="0:23945">
-                <KeyedProperty property="y" id="0:23946">
-                    <KeyFrameDouble value="-1.9899313" interpolationType="hold" id="0:23947"/>
                 </KeyedProperty>
             </KeyedObject>
         </LinearAnimation>
@@ -4442,6 +4322,41 @@
         <ViewModelPropertyBoolean name="isPlaying" id="9:1"/>
         <ViewModelPropertyNumber name="progress" id="11:3001"/>
         <ViewModelPropertyBoolean name="spotifyOpen" id="12:1"/>
+        <ViewModelPropertyColor name="themeFFF6F5F2" id="15:1"/>
+        <ViewModelPropertyColor name="themeFFECEAE6" id="15:2"/>
+        <ViewModelPropertyColor name="themeFFE3E0DB" id="15:3"/>
+        <ViewModelPropertyColor name="themeFFE6E3DE" id="15:4"/>
+        <ViewModelPropertyColor name="themeFFF1EFEC" id="15:5"/>
+        <ViewModelPropertyColor name="themeFF8A8A8A" id="15:6"/>
+        <ViewModelPropertyColor name="themeFFE4E1DC" id="15:7"/>
+        <ViewModelPropertyColor name="themeFFF4F4F4" id="15:8"/>
+        <ViewModelPropertyColor name="theme00F4F4F4" id="15:9"/>
+        <ViewModelPropertyColor name="themeFFF6F4F0" id="15:10"/>
+        <ViewModelPropertyColor name="themeFFD8D4CE" id="15:11"/>
+        <ViewModelPropertyColor name="themeFFE6E2DC" id="15:12"/>
+        <ViewModelPropertyColor name="themeE6FFFFFF" id="15:13"/>
+        <ViewModelPropertyColor name="theme99FFFFFF" id="15:14"/>
+        <ViewModelPropertyColor name="themeB3FFFFFF" id="15:15"/>
+        <ViewModelPropertyColor name="themeFFDFDFDF" id="15:16"/>
+        <ViewModelPropertyColor name="themeFFF3F3F3" id="15:17"/>
+        <ViewModelPropertyColor name="themeFFB7B7B7" id="15:18"/>
+        <ViewModelPropertyColor name="themeFFFAF9F7" id="15:19"/>
+        <ViewModelPropertyColor name="themeFFE2DFDA" id="15:20"/>
+        <ViewModelPropertyColor name="themeFFE5E2DD" id="15:21"/>
+        <ViewModelPropertyNumber name="controlsY" id="16:1"/>
+        <ViewModelPropertyNumber name="bodyHeight" id="16:2"/>
+        <ViewModelPropertyNumber name="bodyY" id="16:3"/>
+        <ViewModelPropertyNumber name="speakerY" id="16:4"/>
+        <ViewModelPropertyNumber name="speakerWellY" id="16:5"/>
+        <ViewModelPropertyNumber name="turntableDetailsOpacity" id="16:6"/>
+        <ViewModelPropertyNumber name="recordScale" id="16:7"/>
+        <ViewModelPropertyNumber name="recordX" id="16:8"/>
+        <ViewModelPropertyNumber name="recordY" id="16:9"/>
+        <ViewModelPropertyNumber name="recordAOpacity" id="16:22"/>
+        <ViewModelPropertyNumber name="recordBOpacity" id="16:23"/>
+        <ViewModelPropertyString name="songTitle" id="16:20"/>
+        <ViewModelPropertyBoolean name="lyricsMode" id="16:21"/>
+        <ViewModelPropertyBoolean name="hostManagesCovers" id="15:30"/>
         <ViewModelPropertyColor name="accentColor" id="12:2"/>
         <ViewModelPropertyNumber name="coverAOpacity" id="12:3"/>
         <ViewModelPropertyNumber name="coverBOpacity" id="12:4"/>
@@ -4472,6 +4387,41 @@
             <ViewModelInstanceTrigger viewModelPropertyId="11:4003" id="0:24033"/>
             <ViewModelInstanceTrigger viewModelPropertyId="11:4004" id="0:24034"/>
             <ViewModelInstanceBoolean propertyValue="true" viewModelPropertyId="12:1" id="0:24035"/>
+            <ViewModelInstanceColor propertyValue="FFF6F5F2" viewModelPropertyId="15:1" id="15:501"/>
+            <ViewModelInstanceColor propertyValue="FFECEAE6" viewModelPropertyId="15:2" id="15:502"/>
+            <ViewModelInstanceColor propertyValue="FFE3E0DB" viewModelPropertyId="15:3" id="15:503"/>
+            <ViewModelInstanceColor propertyValue="FFE6E3DE" viewModelPropertyId="15:4" id="15:504"/>
+            <ViewModelInstanceColor propertyValue="FFF1EFEC" viewModelPropertyId="15:5" id="15:505"/>
+            <ViewModelInstanceColor propertyValue="FF8A8A8A" viewModelPropertyId="15:6" id="15:506"/>
+            <ViewModelInstanceColor propertyValue="FFE4E1DC" viewModelPropertyId="15:7" id="15:507"/>
+            <ViewModelInstanceColor propertyValue="FFF4F4F4" viewModelPropertyId="15:8" id="15:508"/>
+            <ViewModelInstanceColor propertyValue="00F4F4F4" viewModelPropertyId="15:9" id="15:509"/>
+            <ViewModelInstanceColor propertyValue="FFF6F4F0" viewModelPropertyId="15:10" id="15:510"/>
+            <ViewModelInstanceColor propertyValue="FFD8D4CE" viewModelPropertyId="15:11" id="15:511"/>
+            <ViewModelInstanceColor propertyValue="FFE6E2DC" viewModelPropertyId="15:12" id="15:512"/>
+            <ViewModelInstanceColor propertyValue="E6FFFFFF" viewModelPropertyId="15:13" id="15:513"/>
+            <ViewModelInstanceColor propertyValue="99FFFFFF" viewModelPropertyId="15:14" id="15:514"/>
+            <ViewModelInstanceColor propertyValue="B3FFFFFF" viewModelPropertyId="15:15" id="15:515"/>
+            <ViewModelInstanceColor propertyValue="FFDFDFDF" viewModelPropertyId="15:16" id="15:516"/>
+            <ViewModelInstanceColor propertyValue="FFF3F3F3" viewModelPropertyId="15:17" id="15:517"/>
+            <ViewModelInstanceColor propertyValue="FF666866" viewModelPropertyId="15:18" id="15:518"/>
+            <ViewModelInstanceColor propertyValue="FFFAF9F7" viewModelPropertyId="15:19" id="15:519"/>
+            <ViewModelInstanceColor propertyValue="FFE2DFDA" viewModelPropertyId="15:20" id="15:520"/>
+            <ViewModelInstanceColor propertyValue="FFE5E2DD" viewModelPropertyId="15:21" id="15:521"/>
+            <ViewModelInstanceNumber propertyValue="237" viewModelPropertyId="16:1" id="16:201"/>
+            <ViewModelInstanceNumber propertyValue="58" viewModelPropertyId="16:2" id="16:202"/>
+            <ViewModelInstanceNumber propertyValue="0" viewModelPropertyId="16:3" id="16:203"/>
+            <ViewModelInstanceNumber propertyValue="18" viewModelPropertyId="16:4" id="16:204"/>
+            <ViewModelInstanceNumber propertyValue="21.93" viewModelPropertyId="16:5" id="16:205"/>
+            <ViewModelInstanceNumber propertyValue="1" viewModelPropertyId="16:6" id="16:206"/>
+            <ViewModelInstanceNumber propertyValue="0.94999999" viewModelPropertyId="16:7" id="16:207"/>
+            <ViewModelInstanceNumber propertyValue="0" viewModelPropertyId="16:8" id="16:208"/>
+            <ViewModelInstanceNumber propertyValue="-1" viewModelPropertyId="16:9" id="16:209"/>
+            <ViewModelInstanceNumber propertyValue="1" viewModelPropertyId="16:22" id="16:222"/>
+            <ViewModelInstanceNumber propertyValue="1" viewModelPropertyId="16:23" id="16:223"/>
+            <ViewModelInstanceString propertyValue="Nothing playing" viewModelPropertyId="16:20" id="16:220"/>
+            <ViewModelInstanceBoolean propertyValue="false" viewModelPropertyId="16:21" id="16:221"/>
+            <ViewModelInstanceBoolean propertyValue="false" viewModelPropertyId="15:30" id="15:530"/>
             <ViewModelInstanceColor propertyValue="FF3FAF7C" viewModelPropertyId="12:2" id="0:24036"/>
             <ViewModelInstanceNumber propertyValue="1" viewModelPropertyId="12:3" id="0:24037"/>
             <ViewModelInstanceNumber propertyValue="1" viewModelPropertyId="12:4" id="0:24038"/>

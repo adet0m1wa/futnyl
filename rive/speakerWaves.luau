@@ -89,6 +89,10 @@ type Waves = {
     rotationA: Property<number>?,
     rotationB: Property<number>?,
     awaiting: Property<boolean>?,
+    hostManagesCovers: Property<boolean>?,
+    lyricsMode: Property<boolean>?,
+    recordAOpacity: Property<number>?,
+    recordBOpacity: Property<number>?,
     coverAOpacity: Property<number>?,
     coverBOpacity: Property<number>?,
 
@@ -163,6 +167,10 @@ local function bind(self: Waves, vm: ViewModel)
         self.accent = vm:getColor('accentColor')
         self.rotationA = vm:getNumber('rotationPanicIsland')
         self.rotationB = vm:getNumber('rotationFinalChampion')
+        self.hostManagesCovers = vm:getBoolean('hostManagesCovers')
+        self.lyricsMode = vm:getBoolean('lyricsMode')
+        self.recordAOpacity = vm:getNumber('recordAOpacity')
+        self.recordBOpacity = vm:getNumber('recordBOpacity')
         self.coverAOpacity = vm:getNumber('coverAOpacity')
         self.coverBOpacity = vm:getNumber('coverBOpacity')
         self.awaiting = vm:getBoolean('awaitingTrack')
@@ -293,6 +301,21 @@ local function advanceSpin(self: Waves, seconds: number, sounding: boolean, quie
         end
     end
 
+    -- In the flat layout there is no storage overlay: keep only the current
+    -- record visible instead of exposing the spare one beside the smaller disc.
+    local compactProp = self.lyricsMode
+    local compact = compactProp ~= nil and compactProp.value
+    local recordA = self.recordAOpacity
+    local recordB = self.recordBOpacity
+    if recordA ~= nil then recordA.value = if compact and showingB then 0 else 1 end
+    if recordB ~= nil then recordB.value = if compact and not showingB then 0 else 1 end
+
+    -- The native host controls loading independently of the record animation.
+    -- Keep the standalone test bench behaviour, but never overwrite host art state.
+    local host = self.hostManagesCovers
+    if host ~= nil and host.value then
+        return
+    end
     local coverAOpacity = self.coverAOpacity
     local coverBOpacity = self.coverBOpacity
     if coverAOpacity ~= nil and math.abs(coverAOpacity.value - self.shownA) > 0.001 then
@@ -575,6 +598,10 @@ return function(): Node<Waves>
         rotationA = nil,
         rotationB = nil,
         awaiting = nil,
+        hostManagesCovers = nil,
+        lyricsMode = nil,
+        recordAOpacity = nil,
+        recordBOpacity = nil,
         coverAOpacity = nil,
         coverBOpacity = nil,
 

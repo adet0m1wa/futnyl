@@ -1,4 +1,5 @@
 import AppKit
+import SwiftUI
 @preconcurrency import RiveRuntime
 
 /// A borderless, transparent window that lives on the desktop: above the
@@ -37,7 +38,10 @@ final class WidgetWindow: NSWindow {
         // swallows the first click on an unfocused window unless the view
         // accepts "first mouse", which the Rive view does not. Hand pointer
         // events straight to it so every click presses a key.
-        if let view = contentView {
+        if let content = contentView as? WidgetContentView,
+           let hit = content.hitTest(content.convert(event.locationInWindow, from: nil)),
+           hit === content.vinylView || hit.isDescendant(of: content.vinylView) {
+            let view = content.vinylView
             switch event.type {
             case .leftMouseDown: view.mouseDown(with: event); return
             case .leftMouseDragged: view.mouseDragged(with: event); return
@@ -55,6 +59,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         static let floating = "floatAboveWindows"
         static let haptics = "haptics"
         static let size = "widgetSize"
+        static let appearance = "widgetAppearance"
     }
     private static let sizes: [(String, CGFloat)] = [("Small", 200), ("Medium", 270), ("Large", 360), ("Extra Large", 480)]
 
@@ -63,6 +68,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var window: WidgetWindow!
     private var statusItem: NSStatusItem!
     private var spotifyItem: NSMenuItem!
+    private lazy var nowPlaying = NowPlayingModel(spotify: controller.spotify)
+    private var lyricsItem: NSMenuItem!
+    private var appearanceObservation: NSKeyValueObservation?
 
     func applicationWillTerminate(_ notification: Notification) {
         controller.saveLastPlayed()
@@ -76,23 +84,39 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             NSApp.terminate(nil)
             return
         }
-        defaults.register(defaults: [Key.floating: false, Key.haptics: true, Key.size: 270.0])
+        defaults.register(defaults: [Key.floating: false, Key.haptics: true, Key.size: 270.0, Key.appearance: WidgetAppearance.system.rawValue])
         controller.hapticsEnabled = defaults.bool(forKey: Key.haptics)
 
         window = WidgetWindow(size: CGFloat(defaults.double(forKey: Key.size)))
         applyLevel()
         if !window.setFrameUsingName("VinylWidget") { placeDefault() }
+        let side = CGFloat(defaults.double(forKey: Key.size))
+        var restored = window.frame
+        restored.origin.y += restored.height - side
+        restored.size = WidgetLayout.windowSize(width: side, lyrics: false)
+        window.setFrame(restored, display: false)
         window.setFrameAutosaveName("VinylWidget")
 
         buildMenu()
+        controller.onSnapshot = { [weak self] snapshot in
+            guard let self else { return }
+            self.nowPlaying.update(snapshot)
+            self.window.contentView?.toolTip = self.nowPlaying.title
+        }
+        appearanceObservation = NSApp.observe(\.effectiveAppearance, options: [.new]) { [weak self] _, _ in
+            Task { @MainActor in self?.applyAppearance() }
+        }
+        applyAppearance()
 
-        Task {
+        Task { [self] in
             do {
                 let rive = try await controller.load()
                 let view = RiveUIView(rive: rive)
-                view.frame = window.contentLayoutRect
-                view.autoresizingMask = [.width, .height]
-                window.contentView = view
+                let lyrics = FirstMouseHostingView(rootView: InlineLyricsView(model: nowPlaying))
+                let toggle = FirstMouseHostingView(rootView: LyricsToggle(model: nowPlaying, toggle: { [weak self] in self?.toggleLyrics() }))
+                window.contentView = WidgetContentView(vinylView: view, lyricsView: lyrics, toggleView: toggle)
+                window.contentView?.toolTip = nowPlaying.title
+                applyAppearance()
                 window.orderFrontRegardless()
             } catch {
                 let alert = NSAlert()
@@ -147,6 +171,41 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             : NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.desktopIconWindow)) + 1)
     }
 
+    private func applyAppearance() {
+        let choice = WidgetAppearance(rawValue: defaults.string(forKey: Key.appearance) ?? "") ?? .system
+        window.appearance = choice.appearance
+        let effective = choice.appearance ?? NSApp.effectiveAppearance
+        controller.setDarkAppearance(effective.bestMatch(from: [.aqua, .darkAqua]) == .darkAqua)
+    }
+
+    @objc private func toggleLyrics() {
+        let enabled = !nowPlaying.lyricsVisible
+        nowPlaying.setVisible(enabled)
+        controller.setLyricsMode(enabled)
+        (window.contentView as? WidgetContentView)?.lyricsMode = enabled
+        lyricsItem.title = enabled ? "Hide Lyrics" : "Show Lyrics"
+        lyricsItem.state = enabled ? .on : .off
+    }
+
+    private func resizeWidget(width: CGFloat) {
+        let size = WidgetLayout.windowSize(width: width, lyrics: nowPlaying.lyricsVisible)
+        var frame = window.frame
+        frame.origin.y += frame.height - size.height
+        frame.size = size
+        if let screen = window.screen?.visibleFrame {
+            frame.origin.x = min(max(frame.minX, screen.minX), screen.maxX - frame.width)
+            frame.origin.y = min(max(frame.minY, screen.minY), screen.maxY - frame.height)
+        }
+        window.setFrame(frame, display: true, animate: !NSWorkspace.shared.accessibilityDisplayShouldReduceMotion)
+    }
+
+    @objc private func setAppearance(_ sender: NSMenuItem) {
+        let choice = WidgetAppearance.allCases[sender.tag]
+        defaults.set(choice.rawValue, forKey: Key.appearance)
+        sender.menu?.items.forEach { $0.state = $0 === sender ? .on : .off }
+        applyAppearance()
+    }
+
     // MARK: Menu bar
 
     private func buildMenu() {
@@ -157,7 +216,21 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         spotifyItem = NSMenuItem(title: "Spotify: not running", action: nil, keyEquivalent: "")
         spotifyItem.isEnabled = false
         menu.addItem(spotifyItem)
+        lyricsItem = NSMenuItem(title: "Show Lyrics", action: #selector(toggleLyrics), keyEquivalent: "l")
+        menu.addItem(lyricsItem)
         menu.addItem(.separator())
+
+        let appearanceMenu = NSMenu()
+        for (index, choice) in WidgetAppearance.allCases.enumerated() {
+            let item = NSMenuItem(title: choice.title, action: #selector(setAppearance(_:)), keyEquivalent: "")
+            item.tag = index
+            item.target = self
+            item.state = defaults.string(forKey: Key.appearance) == choice.rawValue ? .on : .off
+            appearanceMenu.addItem(item)
+        }
+        let appearanceItem = NSMenuItem(title: "Appearance", action: nil, keyEquivalent: "")
+        appearanceItem.submenu = appearanceMenu
+        menu.addItem(appearanceItem)
 
         let float = NSMenuItem(title: "Float Above Windows", action: #selector(toggleFloating(_:)), keyEquivalent: "")
         float.state = defaults.bool(forKey: Key.floating) ? .on : .off
@@ -211,11 +284,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let size = Self.sizes[sender.tag].1
         defaults.set(Double(size), forKey: Key.size)
         sender.menu?.items.forEach { $0.state = $0 == sender ? .on : .off }
-        var frame = window.frame
-        // Grow or shrink around the top-left corner, as people expect.
-        frame.origin.y += frame.height - size
-        frame.size = NSSize(width: size, height: size)
-        window.setFrame(frame, display: true, animate: true)
+        resizeWidget(width: size)
     }
 
     @objc private func resetPosition() { placeDefault() }

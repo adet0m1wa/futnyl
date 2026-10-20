@@ -36,7 +36,7 @@ That quits the app, removes it and its saved data (last song, settings), and tak
 
 ## Privacy
 
-Futnyl collects nothing and sends nothing anywhere. It talks to Spotify on your Mac, and it downloads the cover art of the current song from Spotify's image server.
+Futnyl has no analytics. It talks to Spotify on your Mac and downloads the current cover from Spotify’s image server. When you enable lyrics, it looks up the song on LRCLIB using its title, artist, album and duration, then checks the AMLL community database by Spotify track ID if needed; see below.
 
 ## Build from source
 
@@ -46,6 +46,7 @@ You need the Xcode command line tools and the [Rive CLI](https://rive.app) (expe
 cd app
 ./build-app.sh          # -> app/dist/Futnyl.app
 ./build-app.sh --zip    # also app/dist/Futnyl.zip
+./build-app.sh --dmg    # also app/dist/Futnyl.dmg (drag to Applications)
 ```
 
 `rive/` is the Rive file (the turntable, its animation and the cover/colour effects). `app/` is the Swift app that hosts it and talks to Spotify. See [app/README.md](app/README.md) for how the sync works.
@@ -61,3 +62,38 @@ Song titles and cover art shown in the demo video belong to their owners and app
 MIT, see [LICENSE](LICENSE).
 
 Third-party: the Rive runtime ([rive-ios](https://github.com/rive-app/rive-ios), MIT) and IBM Plex Mono (SIL Open Font License 1.1, see `rive/IBM Plex Mono OFL.txt`).
+
+## Song details, lyrics and appearance
+
+The turntable’s former Playing/Paused label now shows the song title in a smaller
+font. Long titles end with an ellipsis; hover over the widget for the full title.
+There is no separate song-and-artist strip.
+
+Click the lyrics button near the top of the turntable (or choose **Show Lyrics**
+from the right-click/menu-bar menu). The widget keeps its full height: a smaller
+spinning record and song title share the top row, with one timed lyric line below.
+The speakers and playback keys keep their original positions. Click the line to
+replay it; the larger disc button returns to the turntable. No new window opens.
+Missing lyrics, instrumental tracks and connection errors have compact states
+inside the widget. Untimed lyrics are not presented as synchronized lyrics.
+
+Choose **Appearance → System, Light or Dark** from the menu. System follows macOS;
+your choice is saved and applies to the turntable and inline lyrics.
+
+Lyrics sources are tried in this order:
+
+1. [LRCLIB](https://lrclib.net): title, artist, album and duration must match.
+2. [AMLL community database](https://github.com/amll-dev/amll-ttml-db): timed LRC
+   files indexed by the exact Spotify track ID.
+3. **Find lyrics on Google**: an explicit browser search when neither source has
+   usable timed lyrics. Search results are for discovery and do not replace the
+   synchronized display.
+
+Enabling lyrics sends metadata to LRCLIB over HTTPS. Fallback requests send the
+Spotify track ID to GitHub's raw-content host. No Spotify credentials are sent.
+Google receives the title and artist only when you click the search link.
+Turning lyrics off cancels pending lyric requests. Successful lookups are cached
+in memory for the session, and the widget identifies the source it displays.
+Both sources require usable timestamps and follow the same Spotify playback
+clock. Community lyrics can still have transcription or timing errors; coverage
+is not guaranteed. See the [source research](app/LYRICS-RESEARCH.md).

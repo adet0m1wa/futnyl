@@ -6,6 +6,9 @@ struct LastPlayed: Codable {
     var trackID: String
     var position: TimeInterval
     var duration: TimeInterval
+    var title: String? = nil
+    var artist: String? = nil
+    var album: String? = nil
 }
 
 /// Album art for the records: fetched from Spotify, squared to the label size
@@ -18,6 +21,8 @@ final class ArtStore {
 
     /// The label is drawn for 512 px art.
     private static let size = 512
+    private var artworkByURL: [URL: (Data, RiveRuntime.Color)] = [:]
+    private var decoded: [String: Cover] = [:]
     private var cache: [String: (png: Data, accent: RiveRuntime.Color)] = [:]
 
     private let folder: URL = {
@@ -32,39 +37,54 @@ final class ArtStore {
     /// (Spotify only gives the art of the current song). Nil if it moved on
     /// or there is no art.
     func cover(for trackID: String, spotify: SpotifyBridge, worker: Worker?) async -> Cover? {
+        guard !Task.isCancelled else { return nil }
+        if let cover = decoded[trackID] { return cover }
         if cache[trackID] == nil {
             for attempt in 1...3 {
+                guard !Task.isCancelled else { return nil }
                 if let (png, accent) = await fetch(trackID, spotify: spotify) {
+                    guard !Task.isCancelled else { return nil }
                     if cache.count > 40 { cache.removeAll() }
                     cache[trackID] = (png, accent)
                     break
                 }
                 guard spotify.snapshot.trackID == trackID, attempt < 3 else { break }
-                try? await Task.sleep(for: .milliseconds(250))
+                do { try await Task.sleep(for: .milliseconds(150)) } catch { return nil }
             }
         }
-        guard let entry = cache[trackID], let worker,
+        guard !Task.isCancelled, let entry = cache[trackID], let worker,
               let image = try? await worker.decodeImage(from: entry.png) else { return nil }
-        return Cover(image: image, accent: entry.accent)
+        guard !Task.isCancelled else { return nil }
+        let cover = Cover(image: image, accent: entry.accent)
+        if decoded.count >= 12 { decoded.removeAll() }
+        decoded[trackID] = cover
+        return cover
     }
 
     private func fetch(_ trackID: String, spotify: SpotifyBridge) async -> (Data, RiveRuntime.Color)? {
         // Right after a change Spotify can still report the old song.
-        guard let (current, url) = await spotify.currentArtworkURL(), current == trackID else {
+        guard !Task.isCancelled, let (current, url) = await spotify.currentArtworkURL(),
+              !Task.isCancelled, current == trackID else {
             debugLog("artwork url not ready for \(trackID)")
             return nil
         }
+        if let cached = artworkByURL[url] { return cached }
         let started = Date()
         defer { debugLog("artwork download \(String(format: "%.2f", Date().timeIntervalSince(started)))s") }
         do {
-            let (body, response) = try await URLSession.shared.data(from: url)
+            let request = URLRequest(url: url, timeoutInterval: 5)
+            let (body, response) = try await URLSession.shared.data(for: request)
+            guard !Task.isCancelled else { return nil }
             guard (response as? HTTPURLResponse)?.statusCode == 200,
                   let source = NSImage(data: body)?.cgImage(forProposedRect: nil, context: nil, hints: nil),
                   let png = Self.square(source) else {
                 debugLog("artwork for \(trackID): unusable response")
                 return nil
             }
-            return (png, Self.accent(of: source))
+            let entry = (png, Self.accent(of: source))
+            if artworkByURL.count >= 24 { artworkByURL.removeAll() }
+            artworkByURL[url] = entry
+            return entry
         } catch {
             debugLog("artwork download: \(error.localizedDescription)")
             return nil
@@ -78,8 +98,12 @@ final class ArtStore {
         guard let data = try? JSONEncoder().encode(last) else { return }
         try? data.write(to: lastURL)
         if let entry = cache[last.trackID] {
-            try? entry.png.write(to: lastCoverURL)
+            try? entry.png.write(to: lastCoverURL, options: .atomic)
             try? String(entry.accent.argbValue, radix: 16).write(to: lastAccentURL, atomically: true, encoding: .utf8)
+        } else {
+            // Never pair a new track ID with an older song's disk artwork.
+            try? FileManager.default.removeItem(at: lastCoverURL)
+            try? FileManager.default.removeItem(at: lastAccentURL)
         }
     }
 

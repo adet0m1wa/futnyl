@@ -5,12 +5,19 @@
 #
 #   ./build-app.sh            -> dist/Futnyl.app
 #   ./build-app.sh --zip      -> also dist/Futnyl.zip, ready to upload
+#   ./build-app.sh --dmg      -> also dist/Futnyl.dmg, with an Applications shortcut
 set -euo pipefail
+
+case "${1:-}" in
+    ""|--zip|--dmg) ;;
+    *) echo "Usage: $0 [--zip|--dmg]" >&2; exit 2 ;;
+esac
+[[ $# -le 1 ]] || { echo "Usage: $0 [--zip|--dmg]" >&2; exit 2; }
 
 cd "$(dirname "$0")"
 ROOT="$(pwd)"
 APP="$ROOT/dist/Futnyl.app"
-VERSION="1.0.1"
+VERSION="1.0.4"
 RIVE="${RIVE:-$HOME/.rive/bin/rive}"
 
 # The app's Rive file: the project without its dummy-Spotify test bench (no
@@ -65,4 +72,14 @@ echo "built $APP"
 if [[ "${1:-}" == "--zip" ]]; then
     (cd dist && rm -f Futnyl.zip && ditto -c -k --keepParent Futnyl.app Futnyl.zip)
     echo "zipped dist/Futnyl.zip"
+fi
+
+if [[ "${1:-}" == "--dmg" ]]; then
+    mkdir -p "$STAGE/dmg"
+    ditto "$APP" "$STAGE/dmg/Futnyl.app"
+    ln -s /Applications "$STAGE/dmg/Applications"
+    hdiutil create -volname "Futnyl" -srcfolder "$STAGE/dmg" \
+        -ov -format UDZO "$ROOT/dist/Futnyl.dmg"
+    hdiutil verify "$ROOT/dist/Futnyl.dmg"
+    echo "built dist/Futnyl.dmg"
 fi
