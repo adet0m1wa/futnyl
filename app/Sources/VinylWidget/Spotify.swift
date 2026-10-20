@@ -8,6 +8,7 @@ struct SpotifySnapshot: Equatable {
     var trackID: String?
     var title: String = ""
     var artist: String = ""
+    var album: String = ""
     var position: TimeInterval   // seconds into the track
     var duration: TimeInterval   // seconds
     /// When `position` was true, so progress can be extrapolated between updates.
@@ -61,6 +62,7 @@ final class SpotifyBridge {
 
     private var observers: [NSObjectProtocol] = []
     private var probing = false
+    private var stateRevision = 0
 
     func start() {
         let center = DistributedNotificationCenter.default()
@@ -104,24 +106,29 @@ final class SpotifyBridge {
                 set d to duration of current track
                 set n to name of current track
                 set a to artist of current track
+                set b to album of current track
             on error
                 set i to ""
                 set d to 0
                 set n to ""
                 set a to ""
+                set b to ""
             end try
-            return s & "|" & i & "|" & p & "|" & d & "|" & n & "|" & a
+            set sep to ASCII character 31
+            return s & sep & i & sep & p & sep & d & sep & n & sep & a & sep & b
         """
-        guard let out = await run(script) else { return }
+        let revision = stateRevision
+        guard let out = await run(script), revision == stateRevision else { return }
         if out.isEmpty { publish(.stopped); return }  // Spotify is not running
-        let parts = out.split(separator: "|", omittingEmptySubsequences: false).map(String.init)
-        guard parts.count >= 6 else { return }
+        let parts = out.components(separatedBy: "\u{1f}")
+        guard parts.count == 7 else { return }
         let state = SpotifySnapshot.State(rawValue: parts[0]) ?? .stopped
         publish(SpotifySnapshot(
             state: state,
             trackID: parts[1].isEmpty ? nil : parts[1],
             title: parts[4],
-            artist: parts[5...].joined(separator: "|"),
+            artist: parts[5],
+            album: parts[6],
             position: Self.number(parts[2]) ?? 0,
             duration: (Self.number(parts[3]) ?? 0) / 1000,
             observedAt: Date()))
@@ -145,6 +152,26 @@ final class SpotifyBridge {
             moved.position = actual
             moved.observedAt = Date()
             onSeek?(expected, actual)
+            publish(moved)
+        }
+    }
+
+    /// Seek from a lyric timestamp, updating the local clock after Spotify accepts it.
+    func seek(to position: TimeInterval) {
+        guard isRunning, position.isFinite, let trackID = snapshot.trackID else { return }
+        let clamped = min(max(position, 0), snapshot.duration)
+        let value = String(format: "%.3f", locale: Locale(identifier: "en_US_POSIX"), clamped)
+        Task {
+            // The identity check runs inside Spotify too: a skip can happen while
+            // this command is waiting on the serialized AppleScript queue.
+            let safeID = trackID.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: "\"", with: "\\\"")
+            guard let output = await run("if (id of current track) is \"\(safeID)\" then\nset player position to \(value)\nreturn \"ok\"\nend if"),
+                  output == "ok", snapshot.trackID == trackID else { return }
+            var moved = snapshot
+            let from = moved.position()
+            moved.position = clamped
+            moved.observedAt = Date()
+            onSeek?(from, clamped)
             publish(moved)
         }
     }
@@ -252,12 +279,13 @@ final class SpotifyBridge {
         let stateString = (info["Player State"] as? String ?? "").lowercased()
         let state = SpotifySnapshot.State(rawValue: stateString) ?? .stopped
         if state == .stopped {
-            publish(SpotifySnapshot(state: .stopped, trackID: snapshot.trackID, position: 0,
+            publish(SpotifySnapshot(state: .stopped, trackID: snapshot.trackID, title: snapshot.title, artist: snapshot.artist, album: snapshot.album, position: snapshot.position(),
                                     duration: snapshot.duration, observedAt: Date()))
             return
         }
         let duration = (info["Duration"] as? NSNumber)?.doubleValue ?? snapshot.duration * 1000
-        var position = (info["Playback Position"] as? NSNumber)?.doubleValue ?? 0
+        let sameTrack = (info["Track ID"] as? String ?? snapshot.trackID) == snapshot.trackID
+        var position = (info["Playback Position"] as? NSNumber)?.doubleValue ?? (sameTrack ? snapshot.position() : 0)
         if let restartedAt, Date().timeIntervalSince(restartedAt) < 2,
            info["Track ID"] as? String == snapshot.trackID, position > 3 {
             position = Date().timeIntervalSince(restartedAt)
@@ -265,14 +293,16 @@ final class SpotifyBridge {
         publish(SpotifySnapshot(
             state: state,
             trackID: info["Track ID"] as? String ?? snapshot.trackID,
-            title: info["Name"] as? String ?? "",
-            artist: info["Artist"] as? String ?? "",
+            title: info["Name"] as? String ?? (info["Track ID"] as? String == snapshot.trackID ? snapshot.title : ""),
+            artist: info["Artist"] as? String ?? (info["Track ID"] as? String == snapshot.trackID ? snapshot.artist : ""),
+            album: info["Album"] as? String ?? (info["Track ID"] as? String == snapshot.trackID ? snapshot.album : ""),
             position: position,
             duration: duration / 1000,
             observedAt: Date()))
     }
 
     private func publish(_ new: SpotifySnapshot) {
+        stateRevision += 1
         snapshot = new
         onChange?(new)
         onStatusText?(statusText(for: new))

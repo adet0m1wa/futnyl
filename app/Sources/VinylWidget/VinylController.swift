@@ -41,12 +41,34 @@ final class VinylController {
     /// Spotify restarts the song past 3 s; deciding a little earlier leaves
     /// room for the command to land.
     private static let backRestartsAfter: TimeInterval = 2.5
-    /// A cover that has not arrived by then is skipped; the record comes in
-    /// with the plain label.
-    private static let coverGiveUp: TimeInterval = 2.5
 
     let spotify = SpotifyBridge()
     var hapticsEnabled = true
+    var onSnapshot: ((SpotifySnapshot) -> Void)?
+    private var darkAppearance = false
+    private var lyricsMode = false
+    private var songTitle = "Nothing playing"
+    private var coverTask: Task<Void, Never>?
+
+    func setLyricsMode(_ enabled: Bool) {
+        lyricsMode = enabled
+        viewModel?.setValue(of: BoolProperty(path: "lyricsMode"), to: enabled)
+        for (path, value) in WidgetLayout.sceneValues(lyrics: enabled) {
+            viewModel?.setValue(of: NumberProperty(path: path), to: value)
+        }
+    }
+
+    private func updateSongTitle(_ title: String) {
+        songTitle = title.isEmpty ? "Nothing playing" : title
+        viewModel?.setValue(of: StringProperty(path: "songTitle"), to: WidgetLayout.titleLabel(for: songTitle))
+    }
+
+    func setDarkAppearance(_ dark: Bool) {
+        darkAppearance = dark
+        for (path, light, night) in Self.themeColors {
+            viewModel?.setValue(of: ColorProperty(path: path), to: RiveRuntime.Color(dark ? night : light))
+        }
+    }
 
     private(set) var rive: Rive?
     private var worker: Worker?
@@ -91,6 +113,10 @@ final class VinylController {
                                   fit: .contain(alignment: .center))
         self.worker = worker
         self.viewModel = viewModel
+        viewModel.setValue(of: BoolProperty(path: "hostManagesCovers"), to: true)
+        setDarkAppearance(darkAppearance)
+        setLyricsMode(lyricsMode)
+        updateSongTitle(songTitle)
         self.rive = rive
         observeViewModel(viewModel)
         await restoreLastPlayed()
@@ -121,7 +147,7 @@ final class VinylController {
     func saveLastPlayed() {
         let snapshot = spotify.snapshot
         guard let id = appTrack, id == snapshot.trackID else { return }
-        art.saveLast(LastPlayed(trackID: id, position: snapshot.position(), duration: snapshot.duration))
+        art.saveLast(LastPlayed(trackID: id, position: snapshot.position(), duration: snapshot.duration, title: snapshot.title, artist: snapshot.artist, album: snapshot.album))
     }
 
     // MARK: Widget keys -> Spotify
@@ -294,6 +320,9 @@ final class VinylController {
     }
 
     private func apply(_ snapshot: SpotifySnapshot) {
+        if !snapshot.title.isEmpty { updateSongTitle(snapshot.title) }
+        else if snapshot.trackID != nil, snapshot.trackID != appTrack { updateSongTitle("") }
+        onSnapshot?(snapshot)
         guard viewModel != nil else { return }
         debugLog("spotify \(snapshot.state.rawValue) \(snapshot.trackID ?? "-") \(snapshot.title) @\(Int(snapshot.position))s/\(Int(snapshot.duration))s")
 
@@ -393,29 +422,37 @@ final class VinylController {
         finishChange(with: id)
     }
 
-    /// Puts the song's cover on the record now showing, then lets it in.
+    /// Let the record enter immediately with a neutral label while its art loads.
+    /// A cancelled or late request must never overwrite the latest song.
     private func finishChange(with id: String) {
-        let record = showingB
-        recordTrack[record] = id
+        coverTask?.cancel()
         lastProgress = -1
         changeID += 1
         let change = changeID
-        Task {
-            try? await Task.sleep(for: .seconds(Self.coverGiveUp))
-            if change == self.changeID { self.setAwaiting(false) }
-        }
-        Task {
+        coverTask = Task { [weak self] in
+            guard let self, let vm = self.viewModel else { return }
+            // Rive's next key changes this value before firing its trigger. Read
+            // it directly, rather than relying on the order of two async streams.
+            let record = (try? await vm.value(of: Prop.showingRecordB)) ?? self.showingB
+            guard !Task.isCancelled, change == self.changeID else { return }
+            self.showingB = record
+            self.recordTrack[record] = id
+            let opacity = NumberProperty(path: record ? "coverBOpacity" : "coverAOpacity")
+            vm.setValue(of: opacity, to: 0)
+            vm.setValue(of: Prop.accentColor, to: ArtStore.defaultAccent)
+            self.setAwaiting(false)
+            self.updateProgress()
             let asked = Date()
-            if let cover = await art.cover(for: id, spotify: spotify, worker: worker) {
-                debugLog("art for \(id) took \(String(format: "%.2f", Date().timeIntervalSince(asked)))s")
-                guard change == changeID else { return }
-                heldCovers[record] = cover.image
-                viewModel?.setValue(of: record ? Prop.coverB : Prop.coverA, to: cover.image)
-                viewModel?.setValue(of: Prop.accentColor, to: cover.accent)
-                debugLog("cover for \(id) on record \(record ? "B" : "A"), notes \(String(cover.accent.argbValue, radix: 16))")
-                art.saveLast(LastPlayed(trackID: id, position: 0, duration: spotify.snapshot.duration))
-            }
-            if change == changeID { setAwaiting(false) }
+            guard let cover = await self.art.cover(for: id, spotify: self.spotify, worker: self.worker),
+                  !Task.isCancelled, change == self.changeID, self.appTrack == id else { return }
+            self.heldCovers[record] = cover.image
+            vm.setValue(of: record ? Prop.coverB : Prop.coverA, to: cover.image)
+            vm.setValue(of: opacity, to: 1)
+            vm.setValue(of: Prop.accentColor, to: cover.accent)
+            let snapshot = self.spotify.snapshot
+            self.art.saveLast(LastPlayed(trackID: id, position: snapshot.position(), duration: snapshot.duration,
+                                         title: snapshot.title, artist: snapshot.artist, album: snapshot.album))
+            debugLog("cover for \(id) applied in \(String(format: "%.2f", Date().timeIntervalSince(asked)))s")
         }
     }
 
@@ -446,15 +483,24 @@ final class VinylController {
     /// Shows the song played last (here or, through Spotify, on another
     /// device) where it was left, before Spotify says anything.
     private func restoreLastPlayed() async {
-        guard let last = art.loadLast(), let cover = await art.lastCover(worker: worker) else { return }
-        appTrack = last.trackID
-        recordTrack[showingB] = last.trackID
-        heldCovers[showingB] = cover.image
-        viewModel?.setValue(of: showingB ? Prop.coverB : Prop.coverA, to: cover.image)
-        viewModel?.setValue(of: Prop.accentColor, to: cover.accent)
+        guard let last = art.loadLast() else { return }
+        if let cover = await art.lastCover(worker: worker) {
+            appTrack = last.trackID
+            recordTrack[showingB] = last.trackID
+            heldCovers[showingB] = cover.image
+            viewModel?.setValue(of: showingB ? Prop.coverB : Prop.coverA, to: cover.image)
+            viewModel?.setValue(of: Prop.accentColor, to: cover.accent)
+        } else {
+            // Keep metadata visible, but fetch art when Spotify reports this track.
+            viewModel?.setValue(of: NumberProperty(path: showingB ? "coverBOpacity" : "coverAOpacity"), to: 0)
+        }
         if last.duration > 0 {
             viewModel?.setValue(of: Prop.progress, to: Float(min(last.position / last.duration, 1)))
         }
+        updateSongTitle(last.title ?? "")
+        onSnapshot?(SpotifySnapshot(state: .stopped, trackID: last.trackID,
+                                    title: last.title ?? "", artist: last.artist ?? "", album: last.album ?? "",
+                                    position: last.position, duration: last.duration, observedAt: Date()))
         debugLog("restored last played \(last.trackID)")
     }
 
